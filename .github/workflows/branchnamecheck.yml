@@ -1,0 +1,19 @@
+name: Verify Branch Name and Commit Message
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  linting:
+    name: Verify Branch Name and Commit Message
+    runs-on: ubuntu-latest
+    steps:
+      - uses: namnh240795/verify-branch-name-action@v1.1.3
+        with:
+          regex: ^PB-\d+$
+
+      - uses: namnh240795/verify-commit-action@v1.11
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,23 @@
+name: Lint Check
+
+on:
+  pull_request:
+    branches:
+      - develop
+# This is what will cancel the workflow
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Continuous integration
+        uses: ./.github/actions/npm-cache
+
+      - name: Lint Application
+        run: npm run lint
