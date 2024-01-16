@@ -1,0 +1,10 @@
+{
+  "hosted-zone:account=571678314364:domainName=sveltevn.com:region=ap-southeast-1": {
+    "Id": "/hostedzone/Z01203212A8YK9SST8Z49",
+    "Name": "sveltevn.com."
+  },
+  "hosted-zone:account=571678314364:domainName=sveltevn.com:region=us-east-1": {
+    "Id": "/hostedzone/Z01203212A8YK9SST8Z49",
+    "Name": "sveltevn.com."
+  }
+}
