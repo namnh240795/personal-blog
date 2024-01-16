@@ -2,20 +2,21 @@
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { AwsPersonalBlogStack } from "../lib/aws-personal-blog-stack";
+import { AwsS3Stack } from "../lib/aws-s3-stack";
 
 const app = new cdk.App();
-new AwsPersonalBlogStack(app, "AwsPersonalBlogStack", {
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
+// new AwsPersonalBlogStack(app, "AwsPersonalBlogStack", {
+//   env: {
+//     account: process.env.CDK_DEFAULT_ACCOUNT,
+//     region: process.env.CDK_DEFAULT_REGION,
+//   },
+// });
+
+const docusaurus = new AwsS3Stack(app, "DocusaurusPersonalBucket", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: "us-east-1" || process.env.CDK_DEFAULT_REGION,
+    region: process.env.CDK_DEFAULT_REGION,
   },
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+console.log(docusaurus);
