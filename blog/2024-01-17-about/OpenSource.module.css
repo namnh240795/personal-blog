@@ -1,0 +1,20 @@
+.container {
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.container table th {
+  text-align: left;
+}
+
+.profile {
+  gap: 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.package {
+  width: 70%;
+}
