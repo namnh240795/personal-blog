@@ -10,10 +10,10 @@ import { themes as prismThemes } from "prism-react-renderer";
 const config = {
   title: "Nam Nguyen",
   tagline: "Software Engineer",
-  favicon: "img/favicon.ico",
+  favicon: "https://avatars.githubusercontent.com/u/20696416?v=4",
 
   // Set the production url of your site here
-  url: "https://your-docusaurus-site.example.com",
+  url: "https://namnh240795.sveltevn.com",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -43,8 +43,8 @@ const config = {
           sidebarPath: "./sidebars.js",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          // editUrl:
+          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         blog: {
           showReadingTime: true,
@@ -52,8 +52,8 @@ const config = {
             defaultReadingTime({ content, options: { wordsPerMinute: 300 } }),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          // editUrl:
+          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -66,23 +66,23 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
-      image: "img/docusaurus-social-card.jpg",
+      image: "https://avatars.githubusercontent.com/u/20696416?v=4",
       navbar: {
-        title: "My Site",
+        title: "Nam Nguyen",
         logo: {
-          alt: "My Site Logo",
-          src: "img/logo.svg",
+          alt: "Nam Nguyen Logo",
+          src: "https://avatars.githubusercontent.com/u/20696416?v=4",
         },
         items: [
-          {
-            type: "docSidebar",
-            sidebarId: "tutorialSidebar",
-            position: "left",
-            label: "Tutorial",
-          },
+          // {
+          //   type: "docSidebar",
+          //   sidebarId: "tutorialSidebar",
+          //   position: "left",
+          //   label: "Tutorial",
+          // },
           { to: "/blog", label: "Blog", position: "left" },
           {
-            href: "https://github.com/facebook/docusaurus",
+            href: "https://github.com/namnh240795",
             label: "GitHub",
             position: "right",
           },
@@ -93,12 +93,12 @@ const config = {
         links: [
           {
             title: "Docs",
-            items: [
-              {
-                label: "Tutorial",
-                to: "/docs/intro",
-              },
-            ],
+            // items: [
+            //   {
+            //     label: "Tutorial",
+            //     to: "/docs/intro",
+            //   },
+            // ],
           },
           {
             title: "Community",
