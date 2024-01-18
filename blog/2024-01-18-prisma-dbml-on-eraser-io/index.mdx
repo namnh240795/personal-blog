@@ -1,0 +1,82 @@
+---
+slug: prisma-dbml-on-eraser-io
+title: Prisma dbml on eraser.io
+authors: [namnguyen]
+tags: [prisma, dbml, eraser.io]
+---
+
+Recently, i just found out that **[Eraser](https://eraser.io)** can help me a lot on visualize **database entity relationship**, and it help generate a pretty good UI.
+
+And then, i think about what if i use this with **Prisma DMBL Generator**
+
+### Generate DBML via Prisma
+
+#### Install prisma dbml generator
+
+```sh
+  npm i -D prisma-dbml-generator
+```
+
+#### Add generator to your schema.prisma
+
+```schema
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+```
+
+#### Generate the DBML Schema
+
+```sh
+  npx prisma generate
+```
+
+The schema will be located at `prisma/dbml/schema.dbml`
+
+### Modify DBML to use in Eraser
+
+#### Add this script to `scripts/index.mjs`
+
+```js
+import * as fs from "fs";
+
+const dbml = fs
+  .readFileSync("./prisma/dbml/schema.dbml", "utf-8")
+  .replace(/Table/g, "")
+  .replace(/Ref:/g, "");
+
+fs.writeFileSync("./prisma/dbml/eraser.dbml", dbml);
+```
+
+#### Then start generate your eraser.dbml file by this command
+
+```sh
+  node scripts/index.mjs
+```
+
+The schema will be located at `prisma/dbml/eraser.dbml`
+
+```
+user {
+  id Int [pk, increment]
+  date_created DateTime [default: `now()`, not null]
+  date_modified DateTime [not null]
+  user_login_token user_login_token [not null]
+  user_profile user_profile [not null]
+  name String
+  full_name String
+  last_name String
+}
+
+user_profile {
+  id Int [pk, increment]
+  user_id Int [not null]
+  user user [not null]
+}
+
+user_profile.user_id > user.id
+```
+
+### Copy and use it in Eraser you could see the result as below
+
+![Tux, the Linux mascot](/img/diagram-export-1-18-2024-11_16_10-AM.png)
