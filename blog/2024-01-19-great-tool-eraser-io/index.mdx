@@ -1,0 +1,85 @@
+---
+slug: great-tool-eraser-io
+title: Great Tool Eraser IO
+authors: [namnguyen]
+tags: [eraser.io]
+---
+
+### Why Eraser?
+
+Eraser is not only good at providing the nice graphic for Entity Relation Ship Diagram but also provide it for other graph such as Sequence Diagram, Cloud Architecture, Flow Chart.
+
+### Sequence Diagram
+
+![Sequence Diagram](/img/diagram-export-1-18-2024-6_06_04-PM.png)
+
+### Cloud Architecture Diagram
+
+![Cloud Architecture](/img/diagram-export-1-18-2024-6_05_35-PM.png)
+
+### Flow Chart
+
+![Flow Chart](/img/diagram-export-1-18-2024-6_06_33-PM.png)
+
+### More
+
+It is even possible to use code to generate these diagram
+
+```ts
+// Sequence Diagram
+Client [icon: monitor] > Server: Data request
+activate Client
+Server [icon: server] <> Service: Service request
+loop [label: until success] {
+  Service [icon: tool] > Service: Check availability
+}
+Server - Service: Data processing
+Server --> Client: Data response
+deactivate  Client
+```
+
+```ts
+// Cloud Architecture Diagram
+// Define groups and nodes
+API gateway [icon: aws-api-gateway]
+Lambda [icon: aws-lambda]
+S3 [icon: aws-simple-storage-service]
+VPC Subnet [icon: aws-vpc]{
+  Main Server {
+    Server [icon: aws-ec2]
+    Data [icon: aws-rds]
+  }
+  Queue [icon: aws-auto-scaling]
+  Compute Nodes [color: red] {
+    Worker1 [icon: aws-ec2]
+    Worker2 [icon: aws-ec2]
+    Worker3 [icon: aws-ec2]
+  }
+}
+Analytics [icon: aws-redshift]
+// Define connections
+API gateway > Lambda > Server > Data
+Server > Queue
+Queue > Worker1, Worker2, Worker3
+S3 < Data
+Compute Nodes > Analytics
+```
+
+```ts
+// Flow Chart
+
+1. Landing Page > 2. Sign Up Page
+
+2. Sign Up Page > 3. Phone Verification > 4. Otp (sign up) > 5. Sign Up Success Page
+
+1. Landing Page > 6. Login Page > 7. Home Page
+
+6. Login Page > 8. Forgot password > 4. Otp (forgot password) > 9. Change password
+
+9. Change password > 10. App Pagge
+```
+
+It also possible to attach these diagrams into the document.
+Personally, i'm prefer reading these chat more than reading text.
+
+![Flow Chart](/img/2024-01-19-sample.png)
