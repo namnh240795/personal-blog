@@ -63,6 +63,19 @@ class StaticS3Service extends Construct {
       "arn:aws:acm:us-east-1:571678314364:certificate/12f3f452-43f3-4f27-a888-618a52382105"
     );
 
+    const functionCode = `function handler(event) {
+      var request = event.request;
+      var uri = request.uri;
+      
+      if (uri.endsWith('/')) {
+          request.uri += 'index.html';
+      } else if (!uri.includes('.')) {
+          request.uri += '/index.html';
+      }
+  
+      return request;
+    }`;
+
     const distribution = new cloudfront.Distribution(this, "SiteDistribution", {
       certificate: certificate,
       defaultRootObject: "index.html",
@@ -83,6 +96,14 @@ class StaticS3Service extends Construct {
         compress: true,
         allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        functionAssociations: [
+          {
+            eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
+            function: new cloudfront.Function(this, "MyBlogFunction", {
+              code: cloudfront.FunctionCode.fromInline(functionCode),
+            }),
+          },
+        ],
       },
     });
 
