@@ -1,0 +1,39 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.editor {
+  flex: 1;
+  overflow: auto;
+  padding: 10px;
+  max-height: calc(100vh - 300px);
+}
+
+.editor .cm-editor {
+  height: 100%;
+}
+
+.tree_view {
+  flex: 1;
+  max-height: calc(100vh - 300px);
+  overflow: auto;
+  padding: 10px;
+  height: 100%;
+}
+
+.button_wrapper {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.chart {
+  width: 100%;
+  height: calc(100vh - 300px);
+}
+

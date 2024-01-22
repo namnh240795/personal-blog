@@ -82,6 +82,11 @@ const config = {
           // },
           { to: "/blog", label: "Blog", position: "left" },
           {
+            to: "/json-viewer",
+            label: "Json Viewer",
+            position: "left",
+          },
+          {
             href: "https://github.com/namnh240795",
             label: "GitHub",
             position: "right",
