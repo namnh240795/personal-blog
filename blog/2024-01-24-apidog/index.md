@@ -11,6 +11,8 @@ My main purpose was get a tool that can help me generate request from swagger/ap
 
 Then i found _Apidog_.
 
+<!--truncate-->
+
 The first thing i want to do is import all existed api from swagger to the project and this actually could be done pretty easier using apidog
 
 ### Import _API_ from swagger/api-json
