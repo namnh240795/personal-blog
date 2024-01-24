@@ -5,7 +5,7 @@ authors: [namnguyen]
 tags: [apidog.com]
 ---
 
-Apidog is a new tool that i discoverd today.
+Apidog is a new tool that i discovered today.
 
 My main purpose was get a tool that can help me generate request from swagger/api-json **(the api schema)** and then use the request in my api testing scenario.
 
