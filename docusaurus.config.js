@@ -13,7 +13,7 @@ const config = {
   favicon: "https://avatars.githubusercontent.com/u/20696416?v=4",
 
   // Set the production url of your site here
-  url: "https://namnh240795.sveltevn.com",
+  url: "https://nullo.dev",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: "/",
@@ -47,6 +47,7 @@ const config = {
           //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         blog: {
+          routeBasePath: "/",
           showReadingTime: true,
           readingTime: ({ content, frontMatter, defaultReadingTime }) =>
             defaultReadingTime({ content, options: { wordsPerMinute: 300 } }),
@@ -80,12 +81,12 @@ const config = {
           //   position: "left",
           //   label: "Tutorial",
           // },
-          { to: "/blog", label: "Blog", position: "left" },
-          {
-            to: "/json-viewer",
-            label: "Json Viewer",
-            position: "left",
-          },
+          // { to: "/blog", label: "Blog", position: "left", routeBasePath: "/" },
+          // {
+          //   to: "/json-viewer",
+          //   label: "Json Viewer",
+          //   position: "left",
+          // },
           {
             href: "https://github.com/namnh240795",
             label: "GitHub",
@@ -108,30 +109,30 @@ const config = {
           {
             title: "Community",
             items: [
-              {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/docusaurus",
-              },
-              {
-                label: "Discord",
-                href: "https://discordapp.com/invite/docusaurus",
-              },
-              {
-                label: "Twitter",
-                href: "https://twitter.com/docusaurus",
-              },
+              //     {
+              //       label: "Stack Overflow",
+              //       href: "https://stackoverflow.com/questions/tagged/docusaurus",
+              //     },
+              //     {
+              //       label: "Discord",
+              //       href: "https://discordapp.com/invite/docusaurus",
+              //     },
+              //     {
+              //       label: "Twitter",
+              //       href: "https://twitter.com/docusaurus",
+              //     },
             ],
           },
           {
             title: "More",
             items: [
-              {
-                label: "Blog",
-                to: "/blog",
-              },
+              // {
+              //   label: "Blog",
+              //   to: "/blog",
+              // },
               {
                 label: "GitHub",
-                href: "https://github.com/facebook/docusaurus",
+                href: "https://github.com/namnh240795",
               },
             ],
           },
