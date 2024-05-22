@@ -1,5 +1,5 @@
 ---
-slug: subnet-route-table-internet-gateway-nat-gateway
+slug: subnet
 title: Subnet - AWS VPC
 authors: [namnguyen]
 tags: [networking, aws, subnet]
