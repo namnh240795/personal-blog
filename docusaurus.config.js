@@ -8,6 +8,12 @@ import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  scripts: [
+    {
+      src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5748273332893263",
+      async: true,
+    },
+  ],
   title: "Nam Nguyen",
   tagline: "Software Engineer",
   favicon: "https://avatars.githubusercontent.com/u/20696416?v=4",
