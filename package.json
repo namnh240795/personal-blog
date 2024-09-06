@@ -21,6 +21,7 @@
     "@codemirror/state": "^6.4.0",
     "@codemirror/view": "^6.23.0",
     "@docusaurus/core": "3.1.0",
+    "@docusaurus/plugin-google-tag-manager": "^3.5.2",
     "@docusaurus/preset-classic": "3.1.0",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",

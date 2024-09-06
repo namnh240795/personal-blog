@@ -52,6 +52,10 @@ const config = {
         //   // editUrl:
         //   //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         // },
+        googleTagManager: {
+          containerId: "GTM-NH7C6LK7",
+        },
+
         docs: false,
         blog: {
           routeBasePath: "/",

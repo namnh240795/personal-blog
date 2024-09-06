@@ -1,6 +1,6 @@
 ---
-slug: vpc-practice-example-part-1
-title: AWS VPC Practice - Part 1
+slug: vpc-practice-example
+title: AWS VPC Practice
 authors: [namnguyen]
 tags: [networking, aws, vpc-example]
 ---
