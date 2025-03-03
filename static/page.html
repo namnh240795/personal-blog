@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Barcode Scanner</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            padding: 1rem;
+        }
+
+        .container {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+
+        .scanner-container {
+            position: relative;
+            width: 100%;
+            height: 13rem;
+            border: 4px solid #4299e1;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .result {
+            margin-top: 1rem;
+            color: #718096;
+        }
+
+        .result span {
+            font-weight: 600;
+            color: #4299e1;
+        }
+
+        .error-message {
+            margin-top: 0.5rem;
+            color: #f56565;
+            display: none;
+        }
+
+        .button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .start-button {
+            background-color: #4299e1;
+        }
+
+        .start-button:hover:not(:disabled) {
+            background-color: #3182ce;
+        }
+
+        .stop-button {
+            background-color: #e53e3e;
+        }
+
+        .stop-button:hover:not(:disabled) {
+            background-color: #c53030;
+        }
+    </style>
+    <script type="module">
+        import { BrowserMultiFormatReader } from 'https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/+esm';
+
+        const video = document.getElementById("scanner");
+        const resultSpan = document.getElementById("result");
+        const errorMessage = document.getElementById("error-message");
+        const startButton = document.getElementById("start-button");
+        const stopButton = document.getElementById("stop-button");
+        let scanner;
+
+        async function startScanner() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                video.srcObject = stream;
+                video.play();
+                errorMessage.style.display = "none";
+
+                scanner = new BrowserMultiFormatReader();
+                let lastResult = null;
+                let lastDecodeTime = 0;
+                const debounceTime = 5000; // 5 seconds
+
+                scanner.decodeFromVideoDevice(undefined, "scanner", (result, err) => {
+                    const currentTime = Date.now();
+                    if (result && result.text !== lastResult && (currentTime - lastDecodeTime) > 1000) { // 1 second debounce time
+                        lastResult = result.text;
+                        lastDecodeTime = currentTime;
+                        resultSpan.innerText = result.text;
+                        stopScanner(); // Stop the scanner and video stream after a successful scan
+                    }
+                    if (err) {
+                        console.log("No barcode detected...");
+                    }
+                });
+
+                startButton.disabled = true;
+                stopButton.disabled = false;
+            } catch (err) {
+                console.log('error', error)
+                errorMessage.innerText = "Camera access denied. Please enable camera permissions.";
+                errorMessage.style.display = "block";
+            }
+        }
+
+        function stopScanner() {
+            try {
+                if (scanner) {
+                    scanner.reset();
+                    stopButton.disabled = true;
+                    startButton.disabled = false;
+                }
+            } catch (error) {
+                console.log('error', error)
+            }
+        }
+        startButton.addEventListener("click", startScanner);
+        stopButton.addEventListener("click", stopScanner);
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="title">Barcode Scanner</h2>
+
+        <div class="scanner-container">
+            <video id="scanner" autoplay></video>
+        </div>
+
+        <p class="result">
+            Scanned Code: <span id="result"></span>
+        </p>
+
+        <p id="error-message" class="error-message"></p>
+
+        <button id="start-button" class="button start-button">
+            Start Scanner
+        </button>
+        <button id="stop-button" class="button stop-button" disabled>
+            Stop and Reset Scanner
+        </button>
+
+    </div>
+
+</body>
+
+</html>
