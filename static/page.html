@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTMX Barcode Scanner</title>
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script type="text/javascript" src="https://unpkg.com/@zxing/browser@latest"></script>
+
     <style>
         body {
             display: flex;
@@ -97,7 +99,8 @@
         }
     </style>
     <script type="module">
-        import { BrowserMultiFormatReader } from 'https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/+esm';
+      
+
 
         const video = document.getElementById("scanner");
         const resultSpan = document.getElementById("result");
@@ -105,6 +108,7 @@
         const startButton = document.getElementById("start-button");
         const stopButton = document.getElementById("stop-button");
         let scanner;
+        let controls;
 
         async function startScanner() {
             try {
@@ -112,13 +116,17 @@
                 video.srcObject = stream;
                 video.play();
                 errorMessage.style.display = "none";
+                scanner = new ZXingBrowser.BrowserMultiFormatReader();
+                const previewElem = document.getElementById("scanner");
 
-                scanner = new BrowserMultiFormatReader();
                 let lastResult = null;
                 let lastDecodeTime = 0;
                 const debounceTime = 5000; // 5 seconds
 
-                scanner.decodeFromVideoDevice(undefined, "scanner", (result, err) => {
+                const videoInputDevices = await ZXingBrowser.BrowserCodeReader.listVideoInputDevices();
+                const selectedDeviceId = videoInputDevices[0].deviceId;
+
+                controls = await scanner.decodeFromVideoDevice(selectedDeviceId, previewElem, (result, err) => {
                     const currentTime = Date.now();
                     if (result && result.text !== lastResult && (currentTime - lastDecodeTime) > 1000) { // 1 second debounce time
                         lastResult = result.text;
@@ -127,6 +135,7 @@
                         stopScanner(); // Stop the scanner and video stream after a successful scan
                     }
                     if (err) {
+                        console.log('err', err)
                         console.log("No barcode detected...");
                     }
                 });
@@ -143,7 +152,7 @@
         function stopScanner() {
             try {
                 if (scanner) {
-                    scanner.reset();
+                    controls.stop();
                     stopButton.disabled = true;
                     startButton.disabled = false;
                 }
